@@ -1,6 +1,6 @@
 app_name = "library_management"
 app_title = "Library Management"
-app_publisher = "Monil Kamboj"
+app_publisher = "Monil"
 app_description = "Library Management System"
 app_email = "monil@example.com"
 app_license = "mit"
