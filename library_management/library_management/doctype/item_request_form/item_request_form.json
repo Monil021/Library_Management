@@ -1,0 +1,114 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-06-25 11:23:38.776252",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "new_items_form_section",
+  "item_name",
+  "lead_time_in_days",
+  "minimum_order_qty",
+  "default_purchase_unit_of_measure",
+  "description",
+  "column_break_zvjr",
+  "item_group",
+  "maintain_stock",
+  "safety_stock",
+  "default_sales_unit_of_measure",
+  "default_unit_of_measure",
+  "tax_category_taxes"
+ ],
+ "fields": [
+  {
+   "fieldname": "new_items_form_section",
+   "fieldtype": "Section Break",
+   "label": "New Items Form"
+  },
+  {
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "lead_time_in_days",
+   "fieldtype": "Int",
+   "label": "Lead Time(in days)"
+  },
+  {
+   "fieldname": "minimum_order_qty",
+   "fieldtype": "Data",
+   "label": "Minimum Order Qty"
+  },
+  {
+   "fieldname": "default_purchase_unit_of_measure",
+   "fieldtype": "Data",
+   "label": "Default Purchase Unit of Measure"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "column_break_zvjr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "item_group",
+   "fieldtype": "Data",
+   "label": "Item Group"
+  },
+  {
+   "fieldname": "maintain_stock",
+   "fieldtype": "Data",
+   "label": "Maintain Stock"
+  },
+  {
+   "fieldname": "safety_stock",
+   "fieldtype": "Data",
+   "label": "Safety Stock"
+  },
+  {
+   "fieldname": "default_sales_unit_of_measure",
+   "fieldtype": "Data",
+   "label": "Default Sales Unit of Measure"
+  },
+  {
+   "fieldname": "default_unit_of_measure",
+   "fieldtype": "Data",
+   "label": "Default Unit of Measure"
+  },
+  {
+   "fieldname": "tax_category_taxes",
+   "fieldtype": "Data",
+   "label": "Tax Category (Taxes)"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-06-26 17:41:44.623117",
+ "modified_by": "Administrator",
+ "module": "Library Management",
+ "name": "Item Request Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

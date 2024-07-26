@@ -1,0 +1,63 @@
+[
+
+ {
+  "article_name": "A Passage to India",
+  "author": "E. M. Forster",
+  "description": "<div class=\"ql-editor read-mode\"><p>A Passage to India is a 1924 novel by English author E. M. Forster set against the backdrop of the British Raj and the Indian independence movement in the 1920s.</p></div>",
+  "docstatus": 0,
+  "doctype": "Article",
+  "image": "/private/files/passce44bb.jpeg",
+  "isbn": "4",
+  "modified": "2024-06-04 10:38:30.893916",
+  "name": "A Passage to India",
+  "published": 1,
+  "publisher": "E. M. Forster",
+  "route": "articles/a-passage-to-india",
+  "status": "Available"
+ },
+ {
+  "article_name": "Jane Eyre",
+  "author": "Charlotte Brontë",
+  "description": "<div class=\"ql-editor read-mode\"><p>Jane Eyre is a novel by the English writer Charlotte Brontë. It was published under her pen name \"Currer Bell\" on 19 October 1847 by Smith, Elder &amp; Co. of London. The first American edition was published the following year by Harper &amp; Brothers of New York.</p></div>",
+  "docstatus": 0,
+  "doctype": "Article",
+  "image": "/private/files/jane1e8d41.jpeg",
+  "isbn": "3",
+  "modified": "2024-06-04 10:40:37.257651",
+  "name": "Jane Eyre",
+  "published": 1,
+  "publisher": "Charlotte Brontë",
+  "route": "articles/jane-eyre",
+  "status": "Available"
+ },
+ {
+  "article_name": "Beloved",
+  "author": "Toni Morrison",
+  "description": "<div class=\"ql-editor read-mode\"><p>Beloved is a 1987 novel by American novelist Toni Morrison. Set in the period after the American Civil War, the novel tells the story of a dysfunctional family of formerly enslaved people whose Cincinnati home is haunted by a malevolent spirit. </p></div>",
+  "docstatus": 0,
+  "doctype": "Article",
+  "image": "/private/files/beloved1a4f0f.jpeg",
+  "isbn": "2",
+  "modified": "2024-06-04 10:40:50.822610",
+  "name": "Beloved",
+  "published": 1,
+  "publisher": "Toni Morrison",
+  "route": "articles/beloved",
+  "status": "Available"
+ },
+ {
+  "article_name": "To Kill a Mockingbird",
+  "author": "Harper Lee",
+  "description": "<div class=\"ql-editor read-mode\"><p>To Kill a Mockingbird is a novel by the American author Harper Lee. It was published in June 1960 and became instantly successful. In the United States, it is widely read in high schools and middle schools. </p></div>",
+  "docstatus": 0,
+  "doctype": "Article",
+  "image": "/private/files/kill482198.jpeg",
+  "isbn": "1",
+  "modified": "2024-06-04 10:40:21.972433",
+  "name": "To Kill a Mockingbird",
+  "published": 1,
+  "publisher": "Harper Lee",
+  "route": "articles/to-kill-a-mockingbird",
+  "status": "Issued"
+ }
+]

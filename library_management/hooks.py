@@ -4,6 +4,15 @@ app_publisher = "monil kamboj"
 app_description = "Library Management System"
 app_email = "monil@example.com"
 app_license = "mit"
+test_string = "value"
+test_list = ["value"]
+test_dict = {
+    "key": "value"
+}
+fixtures = [
+    # export all records from the Category table
+    "Article"
+]
 # required_apps = []
 
 # Includes in <head>
@@ -129,7 +138,13 @@ app_license = "mit"
 # 		"on_trash": "method"
 # 	}
 # }
-
+doc_events = {
+	"Employee": {
+		"validate": "library_management.custom_employee.custom_validate",
+		"on_cancel": "method",
+		"on_trash": "method"
+	}
+}
 # Scheduled Tasks
 # ---------------
 

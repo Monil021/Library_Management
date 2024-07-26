@@ -1,0 +1,356 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-06-20 15:08:09.339334",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "customer_details_section",
+  "customer_name",
+  "pan",
+  "column_break_odcv",
+  "customer_group",
+  "gst_no",
+  "section_break_nqtw",
+  "address_1",
+  "address_type",
+  "statefrm",
+  "district",
+  "citytown",
+  "pin_code",
+  "country",
+  "mobile_no_landline_no",
+  "alternate_mobile_no",
+  "contact_person_name",
+  "mail",
+  "fax",
+  "add2",
+  "address_2",
+  "address_type1",
+  "state1",
+  "district1",
+  "citytown1",
+  "pin_code1",
+  "country1",
+  "mobile_no_landline_no1",
+  "alternate_mobile_no1",
+  "contact_person_name1",
+  "mail_1",
+  "fax1",
+  "section_break_eswl",
+  "preferred_billing_address_address_1_or_address_2",
+  "preferred_shipping_address_address_1_or_address_2",
+  "column_break_ggzw",
+  "credit_limit_credit_limit",
+  "commission_rate__sales_team",
+  "contact_no_sales_team",
+  "gst_details_section",
+  "column_break_tasi",
+  "gst_number",
+  "gst_category",
+  "gst_status",
+  "column_break_avgi",
+  "gst_address",
+  "msme_details_section",
+  "yes_or_no",
+  "column_break_zico",
+  "msme_no",
+  "type_microsmallmedium"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer_details_section",
+   "fieldtype": "Section Break",
+   "label": "Customer Details"
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Customer Name ",
+   "reqd": 1
+  },
+  {
+   "fieldname": "pan",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "PAN"
+  },
+  {
+   "fieldname": "column_break_odcv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "customer_group",
+   "fieldtype": "Data",
+   "label": "Customer Group"
+  },
+  {
+   "fieldname": "gst_no",
+   "fieldtype": "Data",
+   "label": "GST Number"
+  },
+  {
+   "fieldname": "section_break_nqtw",
+   "fieldtype": "Section Break",
+   "label": "Address Details"
+  },
+  {
+   "fieldname": "address_1",
+   "fieldtype": "Small Text",
+   "label": "Address 1",
+   "reqd": 1
+  },
+  {
+   "fieldname": "address_type",
+   "fieldtype": "Select",
+   "label": "Address Type",
+   "options": "\nBilling\nShipping\nOffice\nPersonal\nPlant\nPostal\nShop\nSubsidiary\nWarehouse\nCurrent\nPermanent\nOther"
+  },
+  {
+   "fieldname": "citytown",
+   "fieldtype": "Data",
+   "label": "City/Town"
+  },
+  {
+   "fieldname": "district",
+   "fieldtype": "Data",
+   "label": "District"
+  },
+  {
+   "fieldname": "pin_code",
+   "fieldtype": "Data",
+   "label": "Pin Code",
+   "reqd": 1
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Country"
+  },
+  {
+   "fieldname": "mobile_no_landline_no",
+   "fieldtype": "Data",
+   "label": "Mobile No./ Landline No.",
+   "reqd": 1
+  },
+  {
+   "fieldname": "alternate_mobile_no",
+   "fieldtype": "Data",
+   "label": "Alternate Mobile No."
+  },
+  {
+   "fieldname": "contact_person_name",
+   "fieldtype": "Data",
+   "label": "Contact Person Name"
+  },
+  {
+   "fieldname": "mail",
+   "fieldtype": "Data",
+   "label": "Mail "
+  },
+  {
+   "fieldname": "fax",
+   "fieldtype": "Data",
+   "label": "Fax"
+  },
+  {
+   "fieldname": "address_2",
+   "fieldtype": "Small Text",
+   "label": "Address 2"
+  },
+  {
+   "fieldname": "address_type1",
+   "fieldtype": "Select",
+   "label": "Address Type",
+   "options": "\nBilling\nShipping\nOffice\nPersonal\nPlant\nPostal\nShop\nSubsidiary\nWarehouse\nCurrent\nPermanent\nOther"
+  },
+  {
+   "fieldname": "citytown1",
+   "fieldtype": "Data",
+   "label": "City/Town"
+  },
+  {
+   "fieldname": "district1",
+   "fieldtype": "Data",
+   "label": "District"
+  },
+  {
+   "fieldname": "state1",
+   "fieldtype": "Select",
+   "label": "State",
+   "options": "\nAndaman and Nicobar Islands\nAndhra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChandigarh\nChhattisgarh\nDadra and Nagar Haveli\nDelhi (NCR)\nGoa\nGujarat\nHaryana\nHimachal Pradesh\nJammu and Kashmir\nJharkhand\nKarnataka\nKerala\nLadakh\nLakshadweep\nMadhya Pradesh\nMaharashtra\nManipur\nMeghalaya\nMizoram\nNagaland\nOdisha\nPuducherry\nPunjab\nRajasthan\nSikkim\nTamil Nadu\nTelangana\nTripura\nUttar Pradesh\nUttarakhand\nWest Bengal"
+  },
+  {
+   "fieldname": "pin_code1",
+   "fieldtype": "Data",
+   "label": "Pin Code"
+  },
+  {
+   "fieldname": "country1",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Country"
+  },
+  {
+   "fieldname": "mobile_no_landline_no1",
+   "fieldtype": "Data",
+   "label": "Mobile No./ Landline No."
+  },
+  {
+   "fieldname": "alternate_mobile_no1",
+   "fieldtype": "Data",
+   "label": "Alternate Mobile No."
+  },
+  {
+   "fieldname": "contact_person_name1",
+   "fieldtype": "Data",
+   "label": "Contact Person Name"
+  },
+  {
+   "fieldname": "mail_1",
+   "fieldtype": "Data",
+   "label": "Mail "
+  },
+  {
+   "fieldname": "fax1",
+   "fieldtype": "Data",
+   "label": "Fax"
+  },
+  {
+   "fieldname": "section_break_eswl",
+   "fieldtype": "Section Break",
+   "label": "Credit Details"
+  },
+  {
+   "fieldname": "preferred_billing_address_address_1_or_address_2",
+   "fieldtype": "Select",
+   "label": "Preferred Billing Address",
+   "options": "Address 1\nAddress 2"
+  },
+  {
+   "fieldname": "preferred_shipping_address_address_1_or_address_2",
+   "fieldtype": "Select",
+   "label": "Preferred Shipping Address ",
+   "options": "Address 1\nAddress 2"
+  },
+  {
+   "fieldname": "column_break_ggzw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "credit_limit_credit_limit",
+   "fieldtype": "Int",
+   "label": "Credit Limit (Credit Limit)"
+  },
+  {
+   "fieldname": "commission_rate__sales_team",
+   "fieldtype": "Data",
+   "label": "Commission Rate  (Sales Team)"
+  },
+  {
+   "fieldname": "contact_no_sales_team",
+   "fieldtype": "Data",
+   "label": "Contact No. (Sales Team)"
+  },
+  {
+   "fieldname": "gst_details_section",
+   "fieldtype": "Section Break",
+   "label": "GST Details"
+  },
+  {
+   "fieldname": "gst_address",
+   "fieldtype": "Small Text",
+   "label": "GST Address"
+  },
+  {
+   "fieldname": "column_break_tasi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gst_category",
+   "fieldtype": "Select",
+   "label": "GST Category",
+   "options": "\nRegistered Regular\nRegistered Composition\nUnregistered\nSEZ\nOverseas\nDeemed Export\nUIN Holders\nTax Deductor\nTax Collector"
+  },
+  {
+   "fieldname": "gst_status",
+   "fieldtype": "Select",
+   "label": "GST Status",
+   "options": "\nRegistered\nUnregistered\nSuspended\nCancelled"
+  },
+  {
+   "fieldname": "msme_details_section",
+   "fieldtype": "Section Break",
+   "label": "MSME Details"
+  },
+  {
+   "default": "No",
+   "fieldname": "yes_or_no",
+   "fieldtype": "Select",
+   "label": "Yes or No",
+   "options": "Yes\nNo"
+  },
+  {
+   "fieldname": "column_break_zico",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "msme_no",
+   "fieldtype": "Data",
+   "label": "MSME No."
+  },
+  {
+   "default": "Small",
+   "fieldname": "type_microsmallmedium",
+   "fieldtype": "Select",
+   "label": "MSME Type",
+   "options": "Micro\nSmall\nMedium"
+  },
+  {
+   "fieldname": "gst_number",
+   "fieldtype": "Data",
+   "label": "GST Number ",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_avgi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "add2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "statefrm",
+   "fieldtype": "Select",
+   "label": "State",
+   "options": "\nAndaman and Nicobar Islands\nAndhra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChandigarh\nChhattisgarh\nDadra and Nagar Haveli\nDelhi\nGoa\nGujarat\nHaryana\nHimachal Pradesh\nJammu and Kashmir\nJharkhand\nKarnataka\nKerala\nLadakh\nLakshadweep\nMadhya Pradesh\nMaharashtra\nManipur\nMeghalaya\nMizoram\nNagaland\nOdisha\nPuducherry\nPunjab\nRajasthan\nSikkim\nTamil Nadu\nTelangana\nTripura\nUttar Pradesh\nUttarakhand\nWest Bengal"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-06-27 15:14:07.390413",
+ "modified_by": "Administrator",
+ "module": "Library Management",
+ "name": "Customer Request Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
