@@ -7,47 +7,66 @@ frappe.ui.form.on('Supplier Request Form', {
             frm.toggle_display('gst_details_section', true);
         }
     },
-    pan: function(frm){
-        if(frm.doc.pan){
-            setTimeout(function(){
+    before_save: function(frm) {
+        // Initialize a variable to track validation status
+        let validationFailed = false;
+    
+        // Validate PAN number
+        if (frm.doc.pan) {
             var panRegex = /^([A-Z]{5}[0-9]{4}[A-Z])$/;
             if (!panRegex.test(frm.doc.pan)) {
-                // PAN format is incorrect
-                frappe.msgprint(__("PAN number format is incorrect. Please enter a valid PAN number."));}},2000)
-            }},
-    pin_code: function(frm){
-        if(frm.doc.pin_code){
-            setTimeout(function(){
-                var pinRegex = /^[1-9][0-9]{5}$/;
-                if(!pinRegex.test(frm.doc.pin_code)){
-                    frappe.msgprint(__("Pin Code format is incorrect. Please enter a valid Pin Code."));}},2000)
-                    }},
-    mobile_no_landline_no: function(frm){
-        if(frm.doc.mobile_no_landline_no){
-            setTimeout(function(){
-                var mobileRegex = /^\d{10}$/;
-                if(!mobileRegex.test(frm.doc.mobile_no_landline_no)){
-                    frappe.msgprint(__("Please Enter 10 Digit Mobile Number"));}},2000)
-                    }},
-    alternate_mobile_no: function(frm){
-        if(frm.doc.alternate_mobile_no){
-            setTimeout(function(){
-                var mobileRegex1 = /^\d{10}$/;
-                if(!mobileRegex1.test(frm.doc.alternate_mobile_no)){
-                    frappe.msgprint(__("Please Enter 10 Digit Mobile Number"));}},2000)
-                    }},
-    // mail: function(frm){
-    //     if(frm.doc.mail){
-    //         setTimeout(function(){
-    //             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    //             if(!emailRegex .test(frm.doc.mail)){
-    //                 frappe.msgprint(__("Please Enter Valid Mail ID"));}},7000)
-    //                 }},                                     
+                frappe.msgprint(__("PAN number format is incorrect. Please enter a valid PAN number."));
+                validationFailed = true;
+            }
+        }
+    
+        // Validate Pin Code
+        if (frm.doc.pin_code) {
+            var pinRegex = /^[1-9][0-9]{5}$/;
+            if (!pinRegex.test(frm.doc.pin_code)) {
+                frappe.msgprint(__("Pin Code format is incorrect. Please enter a valid Pin Code."));
+                validationFailed = true;
+            }
+        }
+    
+        // Validate Mobile Number / Landline Number
+        if (frm.doc.mobile_no_landline_no) {
+            var mobileRegex = /^\d{10}$/;
+            if (!mobileRegex.test(frm.doc.mobile_no_landline_no)) {
+                frappe.msgprint(__("Mobile Number / Landline Number is invalid. Please enter a valid 10-digit mobile number."));
+                validationFailed = true;
+            }
+        }
+    
+        // Validate Alternate Mobile Number
+        if (frm.doc.alternate_mobile_no) {
+            var mobileRegex1 = /^\d{10}$/;
+            if (!mobileRegex1.test(frm.doc.alternate_mobile_no)) {
+                frappe.msgprint(__("Alternate Mobile Number is invalid. Please enter a valid 10-digit mobile number."));
+                validationFailed = true;
+            }
+        }
+    
+        // Validate Email
+        if (frm.doc.mail) {
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(frm.doc.mail)) {
+                frappe.msgprint(__("Please enter a valid email address."));
+                validationFailed = true;
+            }
+        }
+    
+        // Prevent saving if any validation failed
+        if (validationFailed) {
+            // Stop the save process
+            frappe.validated = false;
+        }
+    },                                  
     gst_no: function(frm) {
         if(!frm.doc.gst_no || !frm.doc.statefrm){
             frm.toggle_display('gst_details_section', false);
         }                                               
-        if (frm.doc.gst_no && frm.doc.st7412589632atefrm) {
+        if (frm.doc.gst_no && frm.doc.statefrm) {
             var gstRegex = /^\d{2}[A-Z]{5}\d{4}[A-Z][1-9A-Z][0-9A-Z][A-Z0-9]$/;
             
             if (gstRegex.test(frm.doc.gst_no)) {
