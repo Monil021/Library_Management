@@ -1,16 +1,18 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
+ "autoname": "SR00000000.#",
  "creation": "2024-06-25 10:35:22.145689",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "supplier_details_section",
   "supplier_name",
-  "pan",
+  "supplier_type",
   "column_break_edby",
   "supplier_group",
-  "gst_no",
+  "old_supplier_code",
   "section_break_znxq",
   "address_1",
   "address_type",
@@ -37,30 +39,29 @@
   "contact_person_name1",
   "mail_1",
   "fax1",
-  "credit_details_section",
-  "credit_limit_credit_limit",
-  "column_break_ozmp",
-  "commission_rate__sales_team",
-  "column_break_wmwv",
-  "contact_no_sales_team",
   "gst_details_section",
-  "gst_number",
-  "gst_category",
+  "address_1_column",
   "gst_status",
+  "gst_category",
+  "gst_no",
   "column_break_wjyl",
-  "gst_address",
+  "gst_status1",
+  "gst_category1",
+  "gst_no1",
   "bank_details_section",
+  "yes_or_no1",
   "bank_name",
-  "account_type",
   "ifsc_code",
   "column_break_jdau",
   "account_name",
   "account_no",
+  "account_type",
   "msme_details_section",
   "yes_or_no",
   "column_break_wvby",
   "msme_no",
-  "type_microsmallmedium"
+  "type_microsmallmedium",
+  "amended_from"
  ],
  "fields": [
   {
@@ -76,23 +77,21 @@
    "reqd": 1
   },
   {
-   "fieldname": "pan",
-   "fieldtype": "Data",
-   "label": "PAN"
-  },
-  {
    "fieldname": "column_break_edby",
    "fieldtype": "Column Break"
   },
   {
    "fieldname": "supplier_group",
-   "fieldtype": "Data",
-   "label": "Supplier Group"
+   "fieldtype": "Link",
+   "label": "Supplier Group",
+   "options": "Supplier Group",
+   "reqd": 1
   },
   {
    "fieldname": "gst_no",
    "fieldtype": "Data",
-   "label": "GST No."
+   "label": "GST No.",
+   "mandatory_depends_on": "eval:doc.gst_status=='Registered'"
   },
   {
    "fieldname": "section_break_znxq",
@@ -109,17 +108,22 @@
    "fieldname": "address_type",
    "fieldtype": "Select",
    "label": "Address Type",
-   "options": "\nBilling\nShipping\nOffice\nPersonal\nPlant\nPostal\nShop\nSubsidiary\nWarehouse\nCurrent\nPermanent\nOther"
+   "options": "\nBilling\nShipping\nOffice\nPersonal\nPlant\nPostal\nShop\nSubsidiary\nWarehouse\nCurrent\nPermanent\nOther",
+   "reqd": 1
   },
   {
    "fieldname": "citytown",
    "fieldtype": "Data",
-   "label": "City/Town"
+   "label": "City/Town",
+   "reqd": 1
   },
   {
    "fieldname": "district",
-   "fieldtype": "Data",
-   "label": "District"
+   "fieldtype": "Link",
+   "label": "District",
+   "link_filters": "[[\"District\",\"state\",\"=\",\"eval:doc.statefrm\"]]",
+   "options": "District",
+   "reqd": 1
   },
   {
    "fieldname": "pin_code",
@@ -136,8 +140,7 @@
   {
    "fieldname": "mobile_no_landline_no",
    "fieldtype": "Data",
-   "label": "Mobile No./ Landline No.",
-   "reqd": 1
+   "label": "Mobile No./ Landline No."
   },
   {
    "fieldname": "alternate_mobile_no",
@@ -152,7 +155,7 @@
   {
    "fieldname": "mail",
    "fieldtype": "Data",
-   "label": "Mail "
+   "label": "E-Mail "
   },
   {
    "fieldname": "fax",
@@ -172,28 +175,35 @@
    "fieldname": "address_type1",
    "fieldtype": "Select",
    "label": "Address Type",
+   "mandatory_depends_on": "eval:doc.address_2",
    "options": "\nBilling\nShipping\nOffice\nPersonal\nPlant\nPostal\nShop\nSubsidiary\nWarehouse\nCurrent\nPermanent\nOther"
   },
   {
    "fieldname": "citytown1",
    "fieldtype": "Data",
-   "label": "City/Town"
+   "label": "City/Town",
+   "mandatory_depends_on": "eval:doc.address_2"
   },
   {
    "fieldname": "state1",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "label": "State",
-   "options": "\nAndaman and Nicobar Islands\nAndhra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChandigarh\nChhattisgarh\nDadra and Nagar Haveli\nDelhi (NCR)\nGoa\nGujarat\nHaryana\nHimachal Pradesh\nJammu and Kashmir\nJharkhand\nKarnataka\nKerala\nLadakh\nLakshadweep\nMadhya Pradesh\nMaharashtra\nManipur\nMeghalaya\nMizoram\nNagaland\nOdisha\nPuducherry\nPunjab\nRajasthan\nSikkim\nTamil Nadu\nTelangana\nTripura\nUttar Pradesh\nUttarakhand\nWest Bengal"
+   "mandatory_depends_on": "eval:doc.address_2",
+   "options": "State"
   },
   {
    "fieldname": "district1",
-   "fieldtype": "Data",
-   "label": "District"
+   "fieldtype": "Link",
+   "label": "District",
+   "link_filters": "[[\"District\",\"state\",\"=\",\"eval:doc.state1\"]]",
+   "mandatory_depends_on": "eval:doc.address_2",
+   "options": "District"
   },
   {
    "fieldname": "pin_code1",
    "fieldtype": "Data",
-   "label": "Pin Code"
+   "label": "Pin Code",
+   "mandatory_depends_on": "eval:doc.address_2"
   },
   {
    "fieldname": "country1",
@@ -227,48 +237,15 @@
    "label": "Fax"
   },
   {
-   "fieldname": "credit_details_section",
-   "fieldtype": "Section Break",
-   "label": "Credit Details"
-  },
-  {
-   "fieldname": "credit_limit_credit_limit",
-   "fieldtype": "Int",
-   "label": "Credit Limit (Credit Limit)"
-  },
-  {
-   "fieldname": "column_break_ozmp",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "commission_rate__sales_team",
-   "fieldtype": "Data",
-   "label": "Commission Rate  (Sales Team)"
-  },
-  {
-   "fieldname": "column_break_wmwv",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "contact_no_sales_team",
-   "fieldtype": "Data",
-   "label": "Contact No. (Sales Team)"
-  },
-  {
    "fieldname": "gst_details_section",
    "fieldtype": "Section Break",
-   "label": "GST Details"
-  },
-  {
-   "fieldname": "gst_number",
-   "fieldtype": "Data",
-   "label": "GST Number ",
-   "read_only": 1
+   "label": "Tax Details"
   },
   {
    "fieldname": "gst_category",
    "fieldtype": "Select",
    "label": "GST Category",
+   "mandatory_depends_on": "eval:doc.gst_status=='Registered'",
    "options": "\nRegistered Regular\nRegistered Composition\nUnregistered\nSEZ\nOverseas\nDeemed Export\nUIN Holders\nTax Deductor\nTax Collector"
   },
   {
@@ -280,11 +257,6 @@
   {
    "fieldname": "column_break_wjyl",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "gst_address",
-   "fieldtype": "Small Text",
-   "label": "GST Address"
   },
   {
    "fieldname": "msme_details_section",
@@ -303,15 +275,19 @@
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval:doc.yes_or_no=='Yes'",
    "fieldname": "msme_no",
    "fieldtype": "Data",
-   "label": "MSME No."
+   "label": "MSME No.",
+   "mandatory_depends_on": "eval:doc.yes_or_no=='Yes'"
   },
   {
    "default": "Small",
+   "depends_on": "eval:doc.yes_or_no=='Yes'",
    "fieldname": "type_microsmallmedium",
    "fieldtype": "Select",
    "label": "MSME Type",
+   "mandatory_depends_on": "eval:doc.yes_or_no=='Yes'",
    "options": "Micro\nSmall\nMedium"
   },
   {
@@ -320,49 +296,114 @@
    "label": "Bank Details"
   },
   {
+   "depends_on": "eval:doc.yes_or_no1=='Yes'",
    "fieldname": "bank_name",
    "fieldtype": "Data",
-   "label": "Bank Name"
+   "label": "Bank Name",
+   "mandatory_depends_on": "eval:doc.yes_or_no1=='Yes'"
   },
   {
-   "default": "Savings",
+   "depends_on": "eval:doc.yes_or_no1=='Yes'",
    "fieldname": "account_type",
    "fieldtype": "Select",
    "label": "Account Type",
-   "options": "Savings\nCurrent\nFixed Deposit\nNRI"
+   "mandatory_depends_on": "eval:doc.yes_or_no1=='Yes'",
+   "options": "\nSavings\nCurrent\nFixed Deposit\nNRI"
   },
   {
+   "depends_on": "eval:doc.yes_or_no1=='Yes'",
    "fieldname": "ifsc_code",
    "fieldtype": "Data",
-   "label": "IFSC Code"
+   "label": "Branch Code",
+   "mandatory_depends_on": "eval:doc.yes_or_no1=='Yes'"
   },
   {
    "fieldname": "column_break_jdau",
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval:doc.yes_or_no1=='Yes'",
    "fieldname": "account_name",
    "fieldtype": "Data",
-   "label": "Account Holder Name"
+   "label": "Account Holder Name",
+   "mandatory_depends_on": "eval:doc.yes_or_no1=='Yes'"
   },
   {
+   "depends_on": "eval:doc.yes_or_no1=='Yes'",
    "fieldname": "account_no",
    "fieldtype": "Data",
-   "label": "Account No."
+   "label": "Account No.",
+   "mandatory_depends_on": "eval:doc.yes_or_no1=='Yes'"
   },
   {
    "fieldname": "statefrm",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "label": "State",
-   "options": "\nAndaman and Nicobar Islands\nAndhra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChandigarh\nChhattisgarh\nDadra and Nagar Haveli\nDelhi\nGoa\nGujarat\nHaryana\nHimachal Pradesh\nJammu and Kashmir\nJharkhand\nKarnataka\nKerala\nLadakh\nLakshadweep\nMadhya Pradesh\nMaharashtra\nManipur\nMeghalaya\nMizoram\nNagaland\nOdisha\nPuducherry\nPunjab\nRajasthan\nSikkim\nTamil Nadu\nTelangana\nTripura\nUttar Pradesh\nUttarakhand\nWest Bengal"
+   "link_filters": "[]",
+   "options": "State",
+   "reqd": 1
+  },
+  {
+   "fieldname": "old_supplier_code",
+   "fieldtype": "Data",
+   "label": "Old Supplier Code"
+  },
+  {
+   "fieldname": "supplier_type",
+   "fieldtype": "Select",
+   "label": "Supplier Type",
+   "options": "\nCompany\nIndividual\nPartnership",
+   "reqd": 1
+  },
+  {
+   "default": "No",
+   "fieldname": "yes_or_no1",
+   "fieldtype": "Select",
+   "label": "Yes or No",
+   "options": "Yes\nNo"
+  },
+  {
+   "fieldname": "gst_status1",
+   "fieldtype": "Select",
+   "label": "GST Status(Address 2)",
+   "options": "\nRegistered\nUnregistered\nSuspended\nCancelled"
+  },
+  {
+   "fieldname": "gst_category1",
+   "fieldtype": "Select",
+   "label": "GST Category(Address 2)",
+   "mandatory_depends_on": "eval:doc.gst_status1=='Registered'",
+   "options": "\nRegistered Regular\nRegistered Composition\nUnregistered\nSEZ\nOverseas\nDeemed Export\nUIN Holders\nTax Deductor\nTax Collector"
+  },
+  {
+   "fieldname": "gst_no1",
+   "fieldtype": "Data",
+   "label": "GST No.(Address 2)",
+   "mandatory_depends_on": "eval:doc.gst_status1=='Registered'"
+  },
+  {
+   "fieldname": "address_1_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Supplier Request Form",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-06-27 15:15:30.170948",
+ "modified": "2024-08-13 10:00:27.736270",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Supplier Request Form",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

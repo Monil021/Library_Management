@@ -1,16 +1,100 @@
 frappe.ui.form.on('Supplier Request Form', {   
     onload: function(frm) {
-        frm.toggle_display('gst_details_section', false);
+        frm.toggle_display('gst_details_section', true);
         frm.toggle_display('msme_no', false);
         frm.toggle_display('type_microsmallmedium', false); 
-        if (frm.doc.gst_no) {
-            frm.toggle_display('gst_details_section', true);
-        }
+
+        // var stateToGSTMapping = {
+        //     'Andhra Pradesh': '37',
+        //     'Arunachal Pradesh': '12',
+        //     'Assam': '18',
+        //     'Bihar': '10',
+        //     'Chhattisgarh': '22',
+        //     'Goa': '30',
+        //     'Gujarat': '24',
+        //     'Haryana': '06',
+        //     'Himachal Pradesh': '02',
+        //     'Jharkhand': '20',
+        //     'Karnataka': '29',
+        //     'Kerala': '32',
+        //     'Madhya Pradesh': '23',
+        //     'Maharashtra': '27',
+        //     'Manipur': '14',
+        //     'Meghalaya': '17',
+        //     'Mizoram': '15',
+        //     'Nagaland': '13',
+        //     'Odisha': '21',
+        //     'Punjab': '03',
+        //     'Rajasthan': '08',
+        //     'Sikkim': '11',
+        //     'Tamil Nadu': '33',
+        //     'Telangana': '36',
+        //     'Tripura': '16',
+        //     'Uttar Pradesh': '09',
+        //     'Uttarakhand': '05',
+        //     'West Bengal': '19',
+        //     'Andaman and Nicobar Islands': '35',
+        //     'Chandigarh': '04',
+        //     'Dadra and Nagar Haveli':'26',
+        //     'Delhi': '07',
+        //     'Lakshadweep': '31',
+        //     'Puducherry': '34'
+        // };
+
+
+        // if (frm.doc.gst_no) {
+        //     frm.toggle_display('gst_details_section', true);
+        // }
+
     },
-    before_save: function(frm) {
-        // Initialize a variable to track validation status
-        let validationFailed = false;
+    // before_save: function(frm) {
+    //     // Initialize a variable to track validation status
+    //     let validationFailed = false;
     
+    //      // Iterate through each child row
+    //      frm.doc.address_details.forEach(function(child) {
+    //         // Validate Pin Code
+    //         if (child.pin_code) {
+    //             var pinRegex = /^[1-9][0-9]{5}$/;
+    //             if (!pinRegex.test(child.pin_code)) {
+    //                 frappe.msgprint(__("Pin Code format is incorrect in one of the address details. Please enter a valid Pin Code."));
+    //                 validationFailed = true;
+    //             }
+    //         }
+
+    //         // Validate Mobile Number / Landline Number
+    //         if (child.mobile_no_landline_no) {
+    //             var mobileRegex = /^\d{10}$/;
+    //             if (!mobileRegex.test(child.mobile_no_landline_no)) {
+    //                 frappe.msgprint(__("Mobile Number / Landline Number is invalid in one of the address details. Please enter a valid 10-digit mobile number."));
+    //                 validationFailed = true;
+    //             }
+    //         }
+
+    //         // Validate Alternate Mobile Number
+    //         if (child.alternate_mobile_no) {
+    //             var mobileRegex1 = /^\d{10}$/;
+    //             if (!mobileRegex1.test(child.alternate_mobile_no)) {
+    //                 frappe.msgprint(__("Alternate Mobile Number is invalid in one of the address details. Please enter a valid 10-digit mobile number."));
+    //                 validationFailed = true;
+    //             }
+    //         }
+
+    //         // Validate Email
+    //         if (child.mail) {
+    //             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    //             if (!emailRegex.test(child.mail)) {
+    //                 frappe.msgprint(__("Please enter a valid email address in one of the address details."));
+    //                 validationFailed = true;
+    //             }
+    //         }
+    //     });
+
+    before_save: function(frm) {
+        
+
+        let validationFailed = false;
+
         // Validate PAN number
         if (frm.doc.pan) {
             var panRegex = /^([A-Z]{5}[0-9]{4}[A-Z])$/;
@@ -54,25 +138,31 @@ frappe.ui.form.on('Supplier Request Form', {
                 frappe.msgprint(__("Please enter a valid email address."));
                 validationFailed = true;
             }
-        }
-    
+        }   
+
+
         // Prevent saving if any validation failed
         if (validationFailed) {
             // Stop the save process
             frappe.validated = false;
         }
-    },                                  
+    },                           
     gst_no: function(frm) {
-        if(!frm.doc.gst_no || !frm.doc.statefrm){
-            frm.toggle_display('gst_details_section', false);
-        }                                               
+        // if(!frm.doc.gst_no || !frm.doc.statefrm){
+        //     frm.toggle_display('gst_details_section', false);
+        // }  
+                                             
         if (frm.doc.gst_no && frm.doc.statefrm) {
             var gstRegex = /^\d{2}[A-Z]{5}\d{4}[A-Z][1-9A-Z][0-9A-Z][A-Z0-9]$/;
             
             if (gstRegex.test(frm.doc.gst_no)) {
                 var gstStateCode = frm.doc.gst_no.substring(0, 2); // Extract state code from GST number
+                // var x = frm.doc.gst_no.substring(2,12);
+                // frm.set_value('pan',x);
+
+
                 // var selectedStateCode = frm.doc.statefrm; // Extract state code from selected state
-                //frappe.msgprint('Entered here!!!!!!!');
+                // frappe.msgprint('Entered here!!!!!!!');
                 // Define a mapping of states to their respective GST numbers
                 var stateToGSTMapping = {
                     'Andhra Pradesh': '37',
@@ -110,15 +200,88 @@ frappe.ui.form.on('Supplier Request Form', {
                     'Lakshadweep': '31',
                     'Puducherry': '34'
                 };
+
                 // Check if the entered GST number matches the GST number for the selected state
                 if (stateToGSTMapping[frm.doc.statefrm] !== gstStateCode) {
                     frappe.throw('GST number does not match with selected state. Please correct it.')
                 } else {
                     frappe.show_alert('GST Number is Valid and Matches with State Code!');
-                    frm.toggle_display('gst_details_section', true);
-                    frm.set_value('gst_number', frm.doc.gst_no);
-                    frm.refresh_field('gst_number');
-                }
+                    // frm.toggle_display('gst_details_section', true);
+                    // frm.set_value('gst_number', frm.doc.gst_no);
+                                    }
+            }
+            else {
+                setTimeout(function() {
+                    frappe.msgprint('Invalid GST number format. Please enter a valid GST number.');
+                }, 2000);
+            }
+        }
+    },
+    gst_no1: function(frm) {
+        // if(!frm.doc.gst_no || !frm.doc.statefrm){
+        //     frm.toggle_display('gst_details_section', false);
+        // }  
+                                             
+        if (frm.doc.gst_no1 && frm.doc.state1) {
+            var gstRegex = /^\d{2}[A-Z]{5}\d{4}[A-Z][1-9A-Z][0-9A-Z][A-Z0-9]$/;
+            
+            if (gstRegex.test(frm.doc.gst_no1)) {
+                var gstStateCode = frm.doc.gst_no1.substring(0, 2); // Extract state code from GST number
+                // var x = frm.doc.gst_no.substring(2,12);
+                // frm.set_value('pan',x);
+
+
+                // var selectedStateCode = frm.doc.statefrm; // Extract state code from selected state
+                //frappe.msgprint('Entered here!!!!!!!');
+                // Define a mapping of states to their respective GST numbers
+
+
+                var stateToGSTMapping = {
+                    'Andhra Pradesh': '37',
+                    'Arunachal Pradesh': '12',
+                    'Assam': '18',
+                    'Bihar': '10',
+                    'Chhattisgarh': '22',
+                    'Goa': '30',
+                    'Gujarat': '24',
+                    'Haryana': '06',
+                    'Himachal Pradesh': '02',
+                    'Jharkhand': '20',
+                    'Karnataka': '29',
+                    'Kerala': '32',
+                    'Madhya Pradesh': '23',
+                    'Maharashtra': '27',
+                    'Manipur': '14',
+                    'Meghalaya': '17',
+                    'Mizoram': '15',
+                    'Nagaland': '13',
+                    'Odisha': '21',
+                    'Punjab': '03',
+                    'Rajasthan': '08',
+                    'Sikkim': '11',
+                    'Tamil Nadu': '33',
+                    'Telangana': '36',
+                    'Tripura': '16',
+                    'Uttar Pradesh': '09',
+                    'Uttarakhand': '05',
+                    'West Bengal': '19',
+                    'Andaman and Nicobar Islands': '35',
+                    'Chandigarh': '04',
+                    'Dadra and Nagar Haveli':'26',
+                    'Delhi': '07',
+                    'Lakshadweep': '31',
+                    'Puducherry': '34'
+};
+
+
+                // Check if the entered GST number matches the GST number for the selected state
+                if (stateToGSTMapping[frm.doc.state1] !== gstStateCode) {
+                    frappe.throw('GST number does not match with selected state. Please correct it.')
+                } else {
+                    frappe.show_alert('GST Number is Valid and Matches with State Code!');
+                    // frm.toggle_display('gst_details_section', true);
+                    // frm.set_value('gst_number', frm.doc.gst_no);
+                                    }
             }
             else {
                 setTimeout(function() {
@@ -148,58 +311,66 @@ frappe.ui.form.on('Supplier Request Form', {
         if (frm.doc.gst_no && frm.doc.statefrm){
             frm.trigger('gst_no');
         }
+    },
+    state1: function(frm) {
+        // Trigger validation on state change if GST number is already entered
+        if (frm.doc.gst_no1 && frm.doc.state1){
+            frm.trigger('gst_no1');
+        }
     }
     });
 
-// validateGSTNumber: function(state, gst_no, stateCodes) {
-//     // Check if the selected state matches the state code in the GST number
-//     if (!stateCodes[state]) {
-//         throw new Error(`Invalid state code ${state} in GST number.`);
-//     }
-
-//     const gstStateCode = gst_no.substring(0, 2);
+    // frappe.ui.form.on('Address Details', {
+    //     validate: function(frm) {
+    //         // Initialize a variable to track validation status
+    //         let validationFailed = false;
+            
+    //         // Iterate through each child row
+    //         frm.doc.address_details.forEach(function(child) {
+    //             // Validate Pin Code
+    //             if (child.pin_code) {
+    //                 var pinRegex = /^[1-9][0-9]{5}$/;
+    //                 if (!pinRegex.test(child.pin_code)) {
+    //                     frappe.msgprint(__("Pin Code format is incorrect. Please enter a valid Pin Code."));
+    //                     validationFailed = true;
+    //                 }
+    //             }
     
-//     if (gstStateCode !== state) {
-//         throw new Error(`GST number does not belong to ${stateCodes[state]}.`);
-//     } else {
-//         console.log(`GST number belongs to ${stateCodes[state]}.`);
-//     }
-// }
+    //             // Validate Mobile Number / Landline Number
+    //             if (child.mobile_no_landline_no) {
+    //                 var mobileRegex = /^\d{10}$/;
+    //                 if (!mobileRegex.test(child.mobile_no_landline_no)) {
+    //                     frappe.msgprint(__("Mobile Number / Landline Number is invalid. Please enter a valid 10-digit mobile number."));
+    //                     validationFailed = true;
+    //                 }
+    //             }
+    
+    //             // Validate Alternate Mobile Number
+    //             if (child.alternate_mobile_no) {
+    //                 var mobileRegex1 = /^\d{10}$/;
+    //                 if (!mobileRegex1.test(child.alternate_mobile_no)) {
+    //                     frappe.msgprint                    // frm.toggle_display('gst_details_section', true);
+// (__("Alternate Mobile Number is invalid. Please enter a valid 10-digit mobile number."));
+    //                     validationFailed = true;
+    //                 }
+    //             }
+    
+    //             // Validate Email
+    //             if (child.mail) {
+    //                 var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    //                 if (!emailRegex.test(child.mail)) {
+    //                     frappe.msgprint(__("Please enter a valid email address."));
+    //                     validationFailed = true;
+    //                 }
+    //             }
+    //         });
+    
+    //         // Prevent saving if any validation failed
+    //         if (validationFailed) {
+    //             // Stop the save process
+    //             frappe.validated = false;
+    //         }
+    //     }
+    // });
+    
 
-// gst_no: function(frm) {
-//     if (frm.doc.gst_no) {
-//         //Regular expression to match GST number format (assuming Indian GST format)
-//         var gstRegex = /^\d{2}[A-Z]{5}\d{4}[A-Z][1-9A-Z][0-9A-Z][A-Z0-9]$/;
-//         if (gstRegex.test(frm.doc.gst_no)) {
-//             // Set the GST number field value
-//             frm.set_value('gst_number', frm.doc.gst_no);
-//             frm.refresh_field('gst_number');
-//             // Show the GST details section
-//             frm.toggle_display('gst_details_section', true);
-//             validateGSTNumber(frm.doc.state, frm.doc.gst_no);
-//             console.log("It's a valid GST Number!!!!!!!")
-//          }
-//         //  else {
-//         //     // If GST number format is incorrect
-//         //     frappe.msgprint('Invalid GST number format. Please enter a valid GST number.');
-//         //     frm.set_value('gst_no', ''); // Clear the incorrect value
-//         //     frm.set_value('gst_number', ''); // Clear corresponding GST number field
-//         //     frm.refresh_fields(['gst_no', 'gst_number']);
-//         //     frm.toggle_display('gst_details_section', false);
-//         // }
-//         else {
-//             // If GST number format is incorrect
-//             setTimeout(function() {
-//                 frappe.msgprint('Invalid GST number format. Please enter a valid GST number.');
-//                 frm.set_value('gst_no', ''); // Clear the incorrect value
-//                 frm.set_value('gst_number', ''); // Clear corresponding GST number field
-//                 frm.refresh_fields(['gst_no', 'gst_number']);
-//                 frm.toggle_display('gst_details_section', false);
-//             }, 1000);
-//         }
-//     } else {
-//         frm.refresh_field('gst_no');
-//         frm.refresh_field('gst_number');
-//         frm.toggle_display('gst_details_section', false);
-//     }
-// },

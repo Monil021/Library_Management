@@ -7,10 +7,10 @@
  "field_order": [
   "customer_details_section",
   "customer_name",
-  "pan",
+  "customer_type",
   "column_break_odcv",
   "customer_group",
-  "gst_no",
+  "old_customer_code",
   "section_break_nqtw",
   "address_1",
   "address_type",
@@ -24,6 +24,7 @@
   "contact_person_name",
   "mail",
   "fax",
+  "preffered_billing_address",
   "add2",
   "address_2",
   "address_type1",
@@ -37,25 +38,29 @@
   "contact_person_name1",
   "mail_1",
   "fax1",
-  "section_break_eswl",
-  "preferred_billing_address_address_1_or_address_2",
-  "preferred_shipping_address_address_1_or_address_2",
-  "column_break_ggzw",
-  "credit_limit_credit_limit",
-  "commission_rate__sales_team",
-  "contact_no_sales_team",
+  "preferred_shipping_address",
   "gst_details_section",
   "column_break_tasi",
-  "gst_number",
-  "gst_category",
   "gst_status",
+  "gst_category",
+  "gst_no",
   "column_break_avgi",
+  "pan",
   "gst_address",
+  "bank_details_section",
+  "yes_or_no1",
+  "bank_name",
+  "account_type",
+  "branch_code",
+  "column_break_qzeg",
+  "account_name",
+  "account_no",
   "msme_details_section",
   "yes_or_no",
   "column_break_zico",
   "msme_no",
-  "type_microsmallmedium"
+  "type_microsmallmedium",
+  "amended_from"
  ],
  "fields": [
   {
@@ -82,13 +87,16 @@
   },
   {
    "fieldname": "customer_group",
-   "fieldtype": "Data",
-   "label": "Customer Group"
+   "fieldtype": "Link",
+   "label": "Customer Group",
+   "options": "Customer Group",
+   "reqd": 1
   },
   {
    "fieldname": "gst_no",
    "fieldtype": "Data",
-   "label": "GST Number"
+   "label": "GST Number",
+   "mandatory_depends_on": "eval:doc.gst_status=='Registered'"
   },
   {
    "fieldname": "section_break_nqtw",
@@ -105,17 +113,22 @@
    "fieldname": "address_type",
    "fieldtype": "Select",
    "label": "Address Type",
-   "options": "\nBilling\nShipping\nOffice\nPersonal\nPlant\nPostal\nShop\nSubsidiary\nWarehouse\nCurrent\nPermanent\nOther"
+   "options": "\nBilling\nShipping\nOffice\nPersonal\nPlant\nPostal\nShop\nSubsidiary\nWarehouse\nCurrent\nPermanent\nOther",
+   "reqd": 1
   },
   {
    "fieldname": "citytown",
    "fieldtype": "Data",
-   "label": "City/Town"
+   "label": "City/Town",
+   "reqd": 1
   },
   {
    "fieldname": "district",
-   "fieldtype": "Data",
-   "label": "District"
+   "fieldtype": "Link",
+   "label": "District",
+   "link_filters": "[[\"District\",\"state\",\"=\",\"eval:doc.statefrm\"]]",
+   "options": "District",
+   "reqd": 1
   },
   {
    "fieldname": "pin_code",
@@ -132,8 +145,7 @@
   {
    "fieldname": "mobile_no_landline_no",
    "fieldtype": "Data",
-   "label": "Mobile No./ Landline No.",
-   "reqd": 1
+   "label": "Mobile No./ Landline No."
   },
   {
    "fieldname": "alternate_mobile_no",
@@ -164,6 +176,7 @@
    "fieldname": "address_type1",
    "fieldtype": "Select",
    "label": "Address Type",
+   "mandatory_depends_on": "eval:doc.address_2",
    "options": "\nBilling\nShipping\nOffice\nPersonal\nPlant\nPostal\nShop\nSubsidiary\nWarehouse\nCurrent\nPermanent\nOther"
   },
   {
@@ -173,14 +186,18 @@
   },
   {
    "fieldname": "district1",
-   "fieldtype": "Data",
-   "label": "District"
+   "fieldtype": "Link",
+   "label": "District",
+   "link_filters": "[[\"District\",\"state\",\"=\",\"eval:doc.state1\"]]",
+   "mandatory_depends_on": "eval:doc.address_2",
+   "options": "District"
   },
   {
    "fieldname": "state1",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "label": "State",
-   "options": "\nAndaman and Nicobar Islands\nAndhra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChandigarh\nChhattisgarh\nDadra and Nagar Haveli\nDelhi (NCR)\nGoa\nGujarat\nHaryana\nHimachal Pradesh\nJammu and Kashmir\nJharkhand\nKarnataka\nKerala\nLadakh\nLakshadweep\nMadhya Pradesh\nMaharashtra\nManipur\nMeghalaya\nMizoram\nNagaland\nOdisha\nPuducherry\nPunjab\nRajasthan\nSikkim\nTamil Nadu\nTelangana\nTripura\nUttar Pradesh\nUttarakhand\nWest Bengal"
+   "mandatory_depends_on": "eval:doc.address_2",
+   "options": "State"
   },
   {
    "fieldname": "pin_code1",
@@ -219,45 +236,9 @@
    "label": "Fax"
   },
   {
-   "fieldname": "section_break_eswl",
-   "fieldtype": "Section Break",
-   "label": "Credit Details"
-  },
-  {
-   "fieldname": "preferred_billing_address_address_1_or_address_2",
-   "fieldtype": "Select",
-   "label": "Preferred Billing Address",
-   "options": "Address 1\nAddress 2"
-  },
-  {
-   "fieldname": "preferred_shipping_address_address_1_or_address_2",
-   "fieldtype": "Select",
-   "label": "Preferred Shipping Address ",
-   "options": "Address 1\nAddress 2"
-  },
-  {
-   "fieldname": "column_break_ggzw",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "credit_limit_credit_limit",
-   "fieldtype": "Int",
-   "label": "Credit Limit (Credit Limit)"
-  },
-  {
-   "fieldname": "commission_rate__sales_team",
-   "fieldtype": "Data",
-   "label": "Commission Rate  (Sales Team)"
-  },
-  {
-   "fieldname": "contact_no_sales_team",
-   "fieldtype": "Data",
-   "label": "Contact No. (Sales Team)"
-  },
-  {
    "fieldname": "gst_details_section",
    "fieldtype": "Section Break",
-   "label": "GST Details"
+   "label": "Tax Details"
   },
   {
    "fieldname": "gst_address",
@@ -272,6 +253,7 @@
    "fieldname": "gst_category",
    "fieldtype": "Select",
    "label": "GST Category",
+   "mandatory_depends_on": "eval:doc.gst_status=='Registered'",
    "options": "\nRegistered Regular\nRegistered Composition\nUnregistered\nSEZ\nOverseas\nDeemed Export\nUIN Holders\nTax Deductor\nTax Collector"
   },
   {
@@ -309,12 +291,6 @@
    "options": "Micro\nSmall\nMedium"
   },
   {
-   "fieldname": "gst_number",
-   "fieldtype": "Data",
-   "label": "GST Number ",
-   "read_only": 1
-  },
-  {
    "fieldname": "column_break_avgi",
    "fieldtype": "Column Break"
   },
@@ -324,14 +300,103 @@
   },
   {
    "fieldname": "statefrm",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "label": "State",
-   "options": "\nAndaman and Nicobar Islands\nAndhra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChandigarh\nChhattisgarh\nDadra and Nagar Haveli\nDelhi\nGoa\nGujarat\nHaryana\nHimachal Pradesh\nJammu and Kashmir\nJharkhand\nKarnataka\nKerala\nLadakh\nLakshadweep\nMadhya Pradesh\nMaharashtra\nManipur\nMeghalaya\nMizoram\nNagaland\nOdisha\nPuducherry\nPunjab\nRajasthan\nSikkim\nTamil Nadu\nTelangana\nTripura\nUttar Pradesh\nUttarakhand\nWest Bengal"
+   "options": "State",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_type",
+   "fieldtype": "Select",
+   "label": "Customer Type",
+   "options": "\nCompany\nIndividual\nPartnership",
+   "reqd": 1
+  },
+  {
+   "fieldname": "old_customer_code",
+   "fieldtype": "Data",
+   "label": "Old Customer Code"
+  },
+  {
+   "depends_on": "eval:doc.address_2",
+   "fieldname": "preffered_billing_address",
+   "fieldtype": "Select",
+   "label": "Preffered Billing Address",
+   "options": "\nAddress 1\nAddress2"
+  },
+  {
+   "depends_on": "eval:doc.address_2",
+   "fieldname": "preferred_shipping_address",
+   "fieldtype": "Select",
+   "label": "Preferred Shipping Address",
+   "options": "\nAddress 1\nAddress2"
+  },
+  {
+   "fieldname": "bank_details_section",
+   "fieldtype": "Section Break",
+   "label": "Bank Details"
+  },
+  {
+   "fieldname": "yes_or_no1",
+   "fieldtype": "Select",
+   "label": "Yes or No",
+   "options": "Yes\nNo"
+  },
+  {
+   "depends_on": "eval:doc.yes_or_no1=='Yes'",
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "label": "Bank Name",
+   "mandatory_depends_on": "eval:doc.yes_or_no1=='Yes'"
+  },
+  {
+   "depends_on": "eval:doc.yes_or_no1=='Yes'",
+   "fieldname": "account_type",
+   "fieldtype": "Select",
+   "label": "Account Type",
+   "mandatory_depends_on": "eval:doc.yes_or_no1=='Yes'",
+   "options": "\nSavings\nCurrent\nFixed Deposit\nNRI"
+  },
+  {
+   "depends_on": "eval:doc.yes_or_no1=='Yes'",
+   "fieldname": "branch_code",
+   "fieldtype": "Data",
+   "label": "Branch Code",
+   "mandatory_depends_on": "eval:doc.yes_or_no1=='Yes'"
+  },
+  {
+   "fieldname": "column_break_qzeg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.yes_or_no1=='Yes'",
+   "fieldname": "account_no",
+   "fieldtype": "Data",
+   "label": "Account Number",
+   "mandatory_depends_on": "eval:doc.yes_or_no1=='Yes'"
+  },
+  {
+   "depends_on": "eval:doc.yes_or_no1=='Yes'",
+   "fieldname": "account_name",
+   "fieldtype": "Data",
+   "label": "Account Holder Name",
+   "mandatory_depends_on": "eval:doc.yes_or_no1=='Yes'"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Customer Request Form",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-06-27 15:14:07.390413",
+ "modified": "2024-08-09 11:13:59.067531",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Customer Request Form",

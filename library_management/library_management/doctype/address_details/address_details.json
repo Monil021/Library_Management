@@ -1,0 +1,111 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-08-07 13:47:10.431902",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "address",
+  "address_type",
+  "state",
+  "district",
+  "citytown",
+  "pin_code",
+  "country",
+  "mobile_no_landline_no",
+  "alternate_mobile_no",
+  "contact_person_name",
+  "mail",
+  "fax"
+ ],
+ "fields": [
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Address",
+   "reqd": 1
+  },
+  {
+   "fieldname": "address_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Address Type",
+   "options": "\nBilling\nShipping\nOffice\nPersonal\nPlant\nPostal\nShop\nSubsidiary\nWarehouse\nCurrent\nPermanent\nOther",
+   "reqd": 1
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "State",
+   "options": "State",
+   "reqd": 1
+  },
+  {
+   "fieldname": "district",
+   "fieldtype": "Link",
+   "label": "District",
+   "link_filters": "[[\"District\",\"state\",\"=\",\"eval:doc.state\"]]",
+   "options": "District"
+  },
+  {
+   "fieldname": "citytown",
+   "fieldtype": "Data",
+   "label": "City/Town"
+  },
+  {
+   "fieldname": "pin_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Pin Code",
+   "reqd": 1
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Country"
+  },
+  {
+   "fieldname": "mobile_no_landline_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Mobile No./ Landline No.",
+   "reqd": 1
+  },
+  {
+   "fieldname": "alternate_mobile_no",
+   "fieldtype": "Data",
+   "label": "Alternate Mobile No."
+  },
+  {
+   "fieldname": "contact_person_name",
+   "fieldtype": "Data",
+   "label": "Contact Person Name"
+  },
+  {
+   "fieldname": "mail",
+   "fieldtype": "Data",
+   "label": "Mail "
+  },
+  {
+   "fieldname": "fax",
+   "fieldtype": "Data",
+   "label": "Fax"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-08-07 13:59:27.633516",
+ "modified_by": "Administrator",
+ "module": "Library Management",
+ "name": "Address Details",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
